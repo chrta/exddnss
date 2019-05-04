@@ -51,9 +51,9 @@ defmodule Exddnss.DdnssUpdater do
     dns_ip = state.state.dns_ip
     case get_own_ip() do
       {:ok, ip} ->
-	Logger.info "My IP is #{ip}"
+	Logger.debug "My IP is #{ip}"
 	if ip != dns_ip do
-	  update_ip!(state.config)
+	  update_ip!(state.config, ip)
 	end
 	ip
       {:error, reason} ->
@@ -80,8 +80,8 @@ defmodule Exddnss.DdnssUpdater do
     end
   end
 
-  defp update_ip!(config) do
-    Logger.info "Updating ip"
+  defp update_ip!(config, ip) do
+    Logger.info "Updating ip to #{ip}"
     {:ok, %HTTPoison.Response{status_code: 200, body: _}} = HTTPoison.get("https://www.ddnss.de/upd.php?key=#{config.update_key}&host=#{config.update_host}")
   end
 
