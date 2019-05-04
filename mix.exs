@@ -15,7 +15,7 @@ defmodule Exddnss.MixProject do
   def application do
     [
       extra_applications: [:logger],
-      mod: {Exddnss.Application, []}
+#      mod: {Exddnss.Application, []}
     ]
   end
 
