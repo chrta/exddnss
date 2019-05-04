@@ -6,10 +6,13 @@ defmodule Exddnss.Application do
   use Application
 
   def start(_type, _args) do
-    # List all child processes to be supervised
     children = [
-      # Starts a worker by calling: Exddnss.Worker.start_link(arg)
-      # {Exddnss.Worker, arg}
+      {Exddnss.DdnssUpdater, %{poll_intervall: 60_0000,
+			       # Put in your update key and host
+			       # update_key: "ae48b5f1c26b7fa5bb3f1bc028ce17e6",
+			       # update_host: "example.ddnss.de"
+			      }
+			     }
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
